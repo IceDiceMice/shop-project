@@ -1,0 +1,19 @@
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../node_modules/bootstrap-icons/font/bootstrap-icons.scss';
+
+.h3{
+  margin-bottom: 0;
+  margin-left: 1rem;
+}
+i{
+  cursor: pointer;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+.list-group-item:hover{
+  background-color: #212529;
+  color: white;
+}
