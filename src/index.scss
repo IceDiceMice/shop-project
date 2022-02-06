@@ -1,19 +1,37 @@
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import '../node_modules/bootstrap-icons/font/bootstrap-icons.scss';
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
+@import "features/bookmark/bookmarks.scss";
 
-.h3{
+.h3 {
   margin-bottom: 0;
   margin-left: 1rem;
 }
-i{
+i {
   cursor: pointer;
+}
+a {
+  text-decoration: none;
 }
 html,
 body,
 #root {
   height: 100%;
 }
-.list-group-item:hover{
-  background-color: #212529;
-  color: white;
+.list-group-item {
+  cursor: pointer;
+  &:hover {
+    background-color: #212529;
+    color: white;
+  }
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.product-image {
+  width: 25%;
+  height: 25%;
+}
+.text-muted::first-letter {
+  text-transform: capitalize;
 }

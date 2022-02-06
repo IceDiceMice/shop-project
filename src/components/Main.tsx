@@ -1,75 +1,49 @@
-import React, { FC, useEffect, useState } from 'react';
-
-type rating = {
-  count: number
-  rate: number
-}
-interface Product {
-  category: string
-  description: string
-  id: number
-  image: string
-  price: number
-  rating: rating
-  title: string
+import React, { Dispatch, FC, useEffect, useState } from "react";
+import ProductsItem from "./ProductsItem";
+import { Product } from "../App";
+interface Props {
+  products: Product[];
+  setProducts: Dispatch<Product[]>;
 }
 
-const Main: FC = () => {
-  const [categories, setCategories] = useState<string[]>([])
-  const [products, setProducts] = useState<Product[]>([])
+const Main: FC<Props> = ({ products, setProducts }) => {
+  const [categories, setCategories] = useState<string[]>([]);
+  console.log(products);
   const getCategories = () => {
-    fetch('https://fakestoreapi.com/products/categories')
-      .then(res => res.json())
-      .then(data => setCategories(data))
-
+    fetch("https://fakestoreapi.com/products/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
   };
   const getProducts = () => {
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }
-  console.log(categories)
-  console.log(products)
-  useEffect(() => {
-    getCategories()
-    getProducts()
-  }, [])
-  return (
-    <div className='w-100 d-flex justify-content-between' >
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  };
 
-      <aside className=' w-25'>
+  useEffect(() => {
+    getCategories();
+    getProducts();
+  }, []);
+  return (
+    <div className="w-100 d-flex justify-content-between">
+      <aside className=" w-25">
         <ul className="list-group m-5 ">
-          {categories.map((category: string, index: number) => {
+          {categories.map((category: string) => {
             return (
-              <li className="list-group-item" key={index}>{category}</li>
-            )
+              <li className="list-group-item" key={category}>
+                {category}
+              </li>
+            );
           })}
         </ul>
       </aside>
 
-      <div className='container d-flex flex-wrap'>
-        {products.map((product) => {
-          return (
-            <div className="card mt-3 ms-3 " style={{ width: "18rem" }} key={product.id}>
-              <div className="card-body">
-                <img src={product.image} alt="product-image" className="img-thumbnail " />
-                <div className='container d-flex justify-content-between align-items-center my-3 '>
-                  <p className="card-text mb-0">Price: {product.price}$</p>
-                  <button type="button" className="btn btn-dark">Buy!</button></div>
-                <h5 className="card-title">{product.title}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">{product.category}</h6>
-                <p className="card-text">{product.description}</p>
-                <div className='container d-flex justify-content-between align-items-center'>
-                  <p className="card-text mb-0">Rating: {product.rating.rate}</p>
-                  <p className="card-text text-secondary">{product.rating.count}</p>
-                </div>
-                <div />
-              </div>
-            </div>
-          )
-        })}
+      <div className="container d-flex flex-wrap">
+        {products.map((product: Product) => (
+          <ProductsItem product={product} key={product.id} />
+        ))}
       </div>
     </div>
-  )
+  );
 };
-export default Main
+export default Main;
