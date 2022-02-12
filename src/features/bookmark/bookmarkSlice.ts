@@ -25,6 +25,7 @@ const bookmarkSlice = createSlice({
 
 })
 export default bookmarkSlice.reducer
+console.log("hello")
 
 export const { add, clear } = bookmarkSlice.actions
 
